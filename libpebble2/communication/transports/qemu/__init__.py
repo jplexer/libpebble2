@@ -38,12 +38,12 @@ class QemuTransport(BaseTransport):
     BUFFER_SIZE = 2048
     must_initialise = True
 
-    def __init__(self, host='127.0.0.1', port=12344):
+    def __init__(self, host='127.0.0.1', port=12344, socket = None):
         self.host = host
         self.port = port
-        self.socket = None
+        self.socket = socket
         self.assembled_data = b''
-        self._connected = False
+        self._connected = socket is not None
 
     def connect(self):
         try:

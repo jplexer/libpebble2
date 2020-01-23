@@ -109,6 +109,10 @@ class QemuRebbleTestComplete(PebblePacket):
     artifact = Uint32()
 
 
+class QemuRebbleTestAlive(PebblePacket):
+    pass
+
+
 class QemuRebbleTest(PebblePacket):
     opcode = Uint16()
     payload = Union(opcode, {
@@ -116,6 +120,7 @@ class QemuRebbleTest(PebblePacket):
         0x0001: QemuRebbleTestRunRequest,
         0x8000: QemuRebbleTestListResponse,
         0x8001: QemuRebbleTestComplete,
+        0xFFFF: QemuRebbleTestAlive
     })
 
 

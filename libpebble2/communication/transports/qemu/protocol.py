@@ -89,6 +89,35 @@ class QemuContentSize(PebblePacket):
 
     size = Uint8()
 
+class QemuRebbleTestListRequest(PebblePacket):
+    pass
+
+
+class QemuRebbleTestListResponse(PebblePacket):
+    id = Uint16()
+    is_last_test = Uint8()
+    name_len = Uint8()
+    name = BinaryArray(length = name_len)
+
+
+class QemuRebbleTestRunRequest(PebblePacket):
+    id = Uint16()
+
+
+class QemuRebbleTestComplete(PebblePacket):
+    passed = Uint8()
+    artifact = Uint32()
+
+
+class QemuRebbleTest(PebblePacket):
+    opcode = Uint16()
+    payload = Union(opcode, {
+        0x0000: QemuRebbleTestListRequest,
+        0x0001: QemuRebbleTestRunRequest,
+        0x8000: QemuRebbleTestListResponse,
+        0x8001: QemuRebbleTestComplete,
+    })
+
 
 class QemuPacket(PebblePacket):
     signature = Uint16(default=HEADER_SIGNATURE)
@@ -105,6 +134,7 @@ class QemuPacket(PebblePacket):
         9: QemuTimeFormat,
         10: QemuTimelinePeek,
         11: QemuContentSize,
+        100: QemuRebbleTest,
     }, length=length)
     footer = Uint16(default=FOOTER_SIGNATURE)
 
@@ -117,6 +147,7 @@ class QemuInboundPacket(PebblePacket):
         1: QemuSPP,
         6: QemuAccelResponse,
         7: QemuVibration,
+        100: QemuRebbleTest,
     }, length=length)
     footer = Uint16(default=FOOTER_SIGNATURE)
 

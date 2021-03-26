@@ -1,9 +1,6 @@
 libpebble2
 ==========
 
-.. image:: https://travis-ci.org/pebble/libpebble2.svg?branch=master
-    :target: https://travis-ci.org/pebble/libpebble2
-
 libpebble2 is a python library for interacting with Pebble devices. It:
 
 * Supports connections to Pebble QEMU instances and to watches via the Pebble mobile app or Bluetooth serial.
@@ -12,7 +9,7 @@ libpebble2 is a python library for interacting with Pebble devices. It:
 * Asynchronous information is provided by a usable event system
 * Features a simple DSL for defining new message types
 * Provides ready-made implementations several Pebble Protocol services, including BlobDB and app installation
-* Works on Python 2.7 and 3.4
+* Works on Python 2.7 and 3.4 through 3.9.
 
 Installation
 ------------
@@ -21,7 +18,7 @@ Installation
 
    pip install libpebble2
 
-Or, grab the source from https://github.com/pebble/libpebble2 and: ::
+Or, grab the source from https://github.com/pebble-dev/libpebble2 and: ::
 
    python setup.py install
 

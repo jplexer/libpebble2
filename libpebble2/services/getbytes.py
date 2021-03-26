@@ -80,6 +80,6 @@ class GetBytesService(EventSourceMixin):
                 data[part.offset:part.offset+len(part.data)] = array('B', part.data)
 
             # Return the data as a more standard bytearray.
-            return data.tostring()
+            return data.tostring() if hasattr(data, 'tostring') else data.tobytes()
         finally:
             queue.close()

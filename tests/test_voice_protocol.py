@@ -8,6 +8,8 @@ import array
 
 from libpebble2.protocol.voice import *
 
+def _array_to_bytes(a):
+    return a.tostring() if hasattr(a, 'tostring') else a.tobytes()
 
 class TestVoiceProtocol(unittest.TestCase):
 
@@ -39,7 +41,7 @@ class TestVoiceProtocol(unittest.TestCase):
                 0x03,                    # attribute id - app uuid
                 16, 0x00,
                 ]
-        serial = array.array('B', data).tostring() + app_uuid.bytes
+        serial = _array_to_bytes(array.array('B', data)) + app_uuid.bytes
         data = [0x01,                    # attribute id - attribute info speex
                 0x1D, 0x00,              # attribute length
                 ord('1'), ord('.'), ord('2'), ord('r'), ord('c'), ord('1'), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -47,7 +49,7 @@ class TestVoiceProtocol(unittest.TestCase):
                 0x00, 0x32,
                 0x04,
                 0x40, 0x01]
-        serial += array.array('B', data).tostring()
+        serial += _array_to_bytes(array.array('B', data))
         self.assertEqual(serial, packet.serialise())
 
         cmd = VoiceControlCommand.parse(packet.serialise())[0]
@@ -75,7 +77,7 @@ class TestVoiceProtocol(unittest.TestCase):
                 0x01,                    # Dictation session
                 0x00
                 ]
-        serial = array.array('B', data).tostring()
+        serial = _array_to_bytes(array.array('B', data))
 
         msg = VoiceControlResult(flags=Flags.AppInitiated,
                                  data=SessionSetupResult(session_type=SessionType.Dictation, result=Result.Success))
@@ -119,7 +121,7 @@ class TestVoiceProtocol(unittest.TestCase):
             ord('c'), ord('o'), ord('m'), ord('p'), ord('u'), ord('t'), ord('a')
         ]
 
-        expected = array.array('B', expected).tostring()
+        expected = _array_to_bytes(array.array('B', expected))
         s1 = [Word(confidence=85, data="Hello"), Word(confidence=74, data="computer")]
         s2 = [Word(confidence=13, data="hell"), Word(confidence=3, data="oh"), Word(confidence=0, data="computa")]
 
@@ -139,7 +141,7 @@ class TestVoiceProtocol(unittest.TestCase):
             0x03,         # attribute type - app uuid
             0x10, 0x00,   # attribute length
         ]
-        expected = array.array('B', expected).tostring() + app_uuid.bytes
+        expected = _array_to_bytes(array.array('B', expected)) + app_uuid.bytes
         transcription = [
             0x02,         # attribute type - transcription
             0x2F, 0x00,   # attribute length
@@ -179,7 +181,7 @@ class TestVoiceProtocol(unittest.TestCase):
             0x07, 0x00,   # Word length
             ord('c'), ord('o'), ord('m'), ord('p'), ord('u'), ord('t'), ord('a')
         ]
-        expected += array.array('B', transcription).tostring()
+        expected += _array_to_bytes(array.array('B', transcription))
 
         s1 = [Word(confidence=85, data="Hello"), Word(confidence=74, data="computer")]
         s2 = [Word(confidence=13, data="hell"), Word(confidence=3, data="oh"), Word(confidence=0, data="computa")]

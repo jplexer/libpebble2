@@ -86,7 +86,7 @@ class Notifications(object):
         notification = TimelineItem(
             item_id=item_id,
             parent_id=uuid.UUID(int=0),
-            timestamp=time.time(),
+            timestamp=int(time.time()),
             duration=0,
             type=TimelineItem.Type.Notification,
             flags=0,

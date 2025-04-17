@@ -36,7 +36,7 @@ class PULSETransport(BaseTransport):
 
     @staticmethod
     def _chunks(list_items, chunk_length):
-        for i in xrange(0, len(list_items), chunk_length):
+        for i in range(0, len(list_items), chunk_length):
             yield list_items[i:i+chunk_length]
 
     def connect(self):
@@ -95,14 +95,14 @@ class PULSETransport(BaseTransport):
             raise ConnectionError('PULSE transport closed')
 
         assert len(packet) >= 1
-        opcode = ord(packet[0])
+        opcode = packet[0]
         data = packet[1:]
         return opcode, data
 
     def _send_with_opcode(self, opcode, body=None):
         assert self.connected
 
-        data = chr(opcode)
+        data = bytes([opcode])
         if body:
             data += body
         self.connection.send(data)

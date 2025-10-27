@@ -17,6 +17,8 @@ class PebbleHardware(object):
     SILK_EVT = 12
     ROBERT_EVT = 13
     SILK = 14
+    ASTERIX = 15
+    OBELIX = 16
 
     TINTIN_BB = 0xFF
     TINTIN_BB2 = 0xFE
@@ -46,6 +48,8 @@ class PebbleHardware(object):
         SILK_EVT: 'diorite',
         ROBERT_EVT: 'emery',
         SILK: 'diorite',
+        ASTERIX: 'flint',
+        OBELIX: 'emery',
         TINTIN_BB: 'aplite',
         TINTIN_BB2: 'aplite',
         SNOWY_BB: 'basalt',

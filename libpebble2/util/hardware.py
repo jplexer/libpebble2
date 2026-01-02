@@ -18,7 +18,9 @@ class PebbleHardware(object):
     ROBERT_EVT = 13
     SILK = 14
     ASTERIX = 15
-    OBELIX = 16
+    OBELIX_EVT = 16
+    OBELIX_DVT = 17
+    OBELIX_PVT = 18
 
     TINTIN_BB = 0xFF
     TINTIN_BB2 = 0xFE
@@ -31,6 +33,8 @@ class PebbleHardware(object):
     ROBERT_BB2 = 0xF7
     SILK_FLINT = 0xF6
     SNOWY_ROBERT = 0xF5
+    OBELIX_BB = 0xF4
+    OBELIX_BB2 = 0xF3
 
     PLATFORMS = {
         UNKNOWN: 'unknown',
@@ -49,7 +53,9 @@ class PebbleHardware(object):
         ROBERT_EVT: 'emery',
         SILK: 'diorite',
         ASTERIX: 'flint',
-        OBELIX: 'emery',
+        OBELIX_EVT: 'emery',
+        OBELIX_DVT: 'emery',
+        OBELIX_PVT: 'emery',
         TINTIN_BB: 'aplite',
         TINTIN_BB2: 'aplite',
         SNOWY_BB: 'basalt',
@@ -61,6 +67,8 @@ class PebbleHardware(object):
         ROBERT_BB2: 'emery',
         SILK_FLINT: 'flint',
         SNOWY_ROBERT: 'emery',
+        OBELIX_BB: 'emery',
+        OBELIX_BB2: 'emery',
     }
 
     @classmethod
